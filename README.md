@@ -1,5 +1,5 @@
 # Lightact-UE4
-A set of functionalities enabling integration of Unreal Engine with Lightact media server.
+A set of functionalities enabling integration of Unreal Engine with [Lightact media server](https://lightact-systems.com).
 
 ## Installation
 **Please note: this plugin has been tested with Unreal Engine 4.19. It does not work (yet) with 4.20.**
@@ -11,7 +11,7 @@ Download the ZIP archive and copy the plugin folder to the *Plugins* folder in y
 When you download the plugin files you need to *Regenerate Visual Studio project files*. You do that by right-clicking on the .uproject file. If you don't see this option, your UE project does not contain any code.
 If this is the case you should add a dummy C++ class first to the project.
 
-When you are done, double click on the .uproject file to open it in the UE Editor. Alternatively, open the project through Epic Launcher. You'll probably encounter warnings about missing plugin dll. You should rebuild the dlls.
+When you are done, double click on the .uproject file to open it in the UE Editor. Alternatively, open the project through Epic Launcher. You'll probably encounter warnings about missing plugin dll. You should click *Yes* to rebuild the dlls.
 
 
 ### Step 3: Enabling the Plugin
