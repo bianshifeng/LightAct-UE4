@@ -4,12 +4,18 @@ A set of functionalities enabling integration of Unreal Engine with Lightact med
 ## Installation
 **Please note: this plugin has been tested with Unreal Engine 4.19. It does not work (yet) with 4.20.**
 
-When you download the plugin files you need to Regenerate Visual Studio project files. You do that by right-clicking on the .uproject file. If you don't see this option, your UE project does not contain any code.
+### Step 1: Download the plugin
+Download the ZIP archive and copy the plugin folder to the *Plugins* folder in your UE project folder. For a more detailed help see [Installing UE plugins video tutorial](https://www.youtube.com/watch?v=85M2BB-Ct9g&list=PLcNPGta1d2XDcSsz8zcW0f2lPSawnW3mR&t=195s&index=2) or [Installing UE4 Plugins User Guide](https://support.lightact-systems.com/installing-ue4-plugins/).
+
+### Step 2: Regenerate project files and build the plugin
+When you download the plugin files you need to *Regenerate Visual Studio project files*. You do that by right-clicking on the .uproject file. If you don't see this option, your UE project does not contain any code.
 If this is the case you should add a dummy C++ class first to the project.
 
 When you are done, double click on the .uproject file to open it in the UE Editor. Alternatively, open the project through Epic Launcher. You'll probably encounter warnings about missing plugin dll. You should rebuild the dlls.
 
-When you are done and the UE Editor opens, make sure the Plugin is enabled.
+
+### Step 3: Enabling the Plugin
+When you are done and the UE Editor opens, make sure the Plugin is enabled. You might need to restart the UE Editor. If you are successful you'll see a new *Lightact* node category in your blueprints.
 
 ## Usage
 The plugin adds a number of new Blueprint nodes. You'll find them all inside *Lightact* category.
