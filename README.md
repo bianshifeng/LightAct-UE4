@@ -30,7 +30,7 @@ This node reads from shared memory (Handle Name) of size (Handle Size). It expec
 #### Open shared memory
 ![openSharedMemory.png](Resources/openSharedMemory.png)
 
-this node is used to create shared memory handle. It should be called once before all other nodes for writing to shared memory. In most cases you'll want to connect it to **Event BeginPlay** node.
+This node is used to create shared memory handle. It should be called once before all other nodes for writing to shared memory. In most cases you'll want to connect it to **Event BeginPlay** node.
 #### Write to shared memory
 ![writeToSharedMemory.png](Resources/writeToSharedMemory.png)
 
@@ -41,7 +41,7 @@ This node is used to write data to shared memory handle. It takes in a *Map of S
 This node is for closing shared memory handle. It should be called once before quitting the game. The *Handle Name* property should be the same as in the *Open shared memory* node. In most cases you'll want to connect it to **Event EndPlay** node.
 
 ### Utility nodes
-#### String explode to vector
+#### String explode to Vector
 ![stringExplodeToVector.png](Resources/stringExplodeToVector.png)
 
 This node expects a string representing a 3-component vector (standard *vector* variable in UE) and outputs a *vector* variable. It is useful if you want to transfer *Vec3* variable from Lightact to *vector* variable in UE.
