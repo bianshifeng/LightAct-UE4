@@ -21,11 +21,14 @@ When you are done and the UE Editor opens, make sure the Plugin is enabled. You 
 The plugin adds a number of new Blueprint nodes. You'll find them all inside *Lightact* category.
 
 ### Nodes for reading from shared memory
+#### Shared memory JSON to string map
 ![sharedMemoryJSONToStringMap.png](Resources/sharedMemoryJSONToStringMap.png)
-**Shared memory JSON to string map**: this node reads from shared memory (Handle Name) of size (Handle Size). It expects the data to be in JSON format. The data is then converted to *Map of Strings to Strings*.
+This node reads from shared memory (Handle Name) of size (Handle Size). It expects the data to be in JSON format. The data is then converted to *Map of Strings to Strings*.
 
 ### Nodes for writing to shared memory
-- **Open shared memory**: this node is used to create shared memory handle. It should be called once before all other nodes for writing to shared memory. In most cases you'll want to connect it to **Event BeginPlay** node.
+### Open shared memory
+![openSharedMemory.png](Resources/openSharedMemory.png)
+this node is used to create shared memory handle. It should be called once before all other nodes for writing to shared memory. In most cases you'll want to connect it to **Event BeginPlay** node.
 - **Write to shared memory**: This node is used to write data to shared memory handle. It takes in a *Map of Strings to Strings* and converts it to JSON before writing it to shared memory.
 - **Close shared memory**: this node is for closing shared memory handle. It should be called once before quitting the game. The *Handle Name* property should be the same as in the *Open shared memory* node. In most cases you'll want to connect it to **Event EndPlay** node.
 
