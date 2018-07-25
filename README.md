@@ -21,7 +21,7 @@ When you are done and the UE Editor opens, make sure the Plugin is enabled. You 
 The plugin adds a number of new Blueprint nodes. You'll find them all inside *Lightact* category.
 
 ### Nodes for reading from shared memory
-![sharedMemoryJSONToStringMap.png](resources/sharedMemoryJSONToStringMap.png)
+![sharedMemoryJSONToStringMap.png](Resources/sharedMemoryJSONToStringMap.png)
 **Shared memory JSON to string map**: this node reads from shared memory (Handle Name) of size (Handle Size). It expects the data to be in JSON format. The data is then converted to *Map of Strings to Strings*.
 
 ### Nodes for writing to shared memory
