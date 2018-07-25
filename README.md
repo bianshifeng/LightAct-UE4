@@ -23,14 +23,27 @@ The plugin adds a number of new Blueprint nodes. You'll find them all inside *Li
 ### Nodes for reading from shared memory
 #### Shared memory JSON to string map
 ![sharedMemoryJSONToStringMap.png](Resources/sharedMemoryJSONToStringMap.png)
+
 This node reads from shared memory (Handle Name) of size (Handle Size). It expects the data to be in JSON format. The data is then converted to *Map of Strings to Strings*.
 
 ### Nodes for writing to shared memory
-### Open shared memory
+#### Open shared memory
 ![openSharedMemory.png](Resources/openSharedMemory.png)
+
 this node is used to create shared memory handle. It should be called once before all other nodes for writing to shared memory. In most cases you'll want to connect it to **Event BeginPlay** node.
-- **Write to shared memory**: This node is used to write data to shared memory handle. It takes in a *Map of Strings to Strings* and converts it to JSON before writing it to shared memory.
-- **Close shared memory**: this node is for closing shared memory handle. It should be called once before quitting the game. The *Handle Name* property should be the same as in the *Open shared memory* node. In most cases you'll want to connect it to **Event EndPlay** node.
+#### Write to shared memory
+![writeToSharedMemory.png](Resources/writeToSharedMemory.png)
+
+This node is used to write data to shared memory handle. It takes in a *Map of Strings to Strings* and converts it to JSON before writing it to shared memory.
+#### Close shared memory
+![closeSharedMemory.png](Resources/closeSharedMemory.png)
+
+This node is for closing shared memory handle. It should be called once before quitting the game. The *Handle Name* property should be the same as in the *Open shared memory* node. In most cases you'll want to connect it to **Event EndPlay** node.
+
+### Utility nodes
+#### String explode to vector
+![stringExplodeToVector.png](Resources/stringExplodeToVector.png)
+This node expects a string representing a 3-component vector (standard *vector* variable in UE) and outputs a *vector* variable. It is useful if you want to transfer *Vec3* variable from Lightact to *vector* variable in UE.
 
 ## Troubleshooting
 If you encounter any build errors, try opening the *.sln* file in Visual Studio and do a *Clean solution* and then *Build solution*. If these 2 actions succeeded you should be able to open the project.
