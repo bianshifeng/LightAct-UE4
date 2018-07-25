@@ -12,7 +12,7 @@
 	"SupportURL": "https://support.lightact-systems.com",
 	"CanContainContent": true,
 	"IsBetaVersion": false,
-	"Installed": false,
+	"Installed": true,
 	"Modules": [
 		{
 			"Name": "Lightact",
