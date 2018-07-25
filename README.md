@@ -12,7 +12,7 @@ When you are done, double click on the .uproject file to open it in the UE Edito
 When you are done and the UE Editor opens, make sure the Plugin is enabled.
 
 ## Usage
-The plugin adds a number of new Blueprint nodes. They are all inside *Lightact* category. They have different purposes.
+The plugin adds a number of new Blueprint nodes. You'll find them all inside *Lightact* category.
 
 ### Nodes for reading from shared memory
 - **Shared memory JSON to string map**: this node reads from shared memory (Handle Name) of size (Handle Size). It expects the data to be in JSON format. The data is then converted to *Map of Strings to Strings*.
@@ -26,3 +26,4 @@ The plugin adds a number of new Blueprint nodes. They are all inside *Lightact* 
 Additional help is available on:
 - [Lightact YouTube UE Playlist](https://www.youtube.com/playlist?list=PLcNPGta1d2XDcSsz8zcW0f2lPSawnW3mR)
 - [User Guide](https://support.lightact-systems.com/unreal-engine-and-lightact-media-server-integration/)
+- [Quick Start Guide](https://support.lightact-systems.com/integrate-lightact-unreal-engine/)
