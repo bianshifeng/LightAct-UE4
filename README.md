@@ -43,6 +43,7 @@ This node is for closing shared memory handle. It should be called once before q
 ### Utility nodes
 #### String explode to vector
 ![stringExplodeToVector.png](Resources/stringExplodeToVector.png)
+
 This node expects a string representing a 3-component vector (standard *vector* variable in UE) and outputs a *vector* variable. It is useful if you want to transfer *Vec3* variable from Lightact to *vector* variable in UE.
 
 ## Troubleshooting
