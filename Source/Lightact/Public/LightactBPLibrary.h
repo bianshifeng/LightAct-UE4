@@ -30,6 +30,15 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Shared memory JSON to string map", Keywords = "Lightact shared memory JSON to string map", ToolTip = "Reads a JSON string from shared memory file and outputs a map of strings to strings."), Category = "Lightact")
 	static void BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& ResultMap, bool& Success);
 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Open shared memory", Keywords = "Open shared memory handle JSON", ToolTip = "Opens shared memory handle. Usually connected to OnBeginPlay. Handle has to be closed on EndPlay."), Category = "Lightact")
+	static void createMemHandle(const FString HandleName, const int HandleSize, FString& error, bool& Success);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Write to shared memory", Keywords = "Write string map to Lightact shared memory JSON", ToolTip = "Converts a string map to JSON and writes it to shared memory"), Category = "Lightact")
+		static void writeSharedMemory(TMap<FString, FString> stringMap, const FString HandleName, const int HandleSize, FString& error, bool& success);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Close shared memory", Keywords = "Close shared memory handle JSON", ToolTip = "Closes shared memory handle. Usually connected to OnEndPlay. Handle has to be opened before."), Category = "Lightact")
+		static void closeMemHandle(const FString HandleName, FString& error, bool& Success);
+
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "String explode to Vector", Keywords = "Lightact string explode to vector", ToolTip = "Splits string by delimiters and returns a composed 3-D space vector."), Category = "Lightact")
 	static void StringExplode(const FString InputString, const FString Delimiters, FVector& Vector);
 };
