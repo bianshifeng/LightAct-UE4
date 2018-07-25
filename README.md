@@ -24,7 +24,7 @@ The plugin adds a number of new Blueprint nodes. You'll find them all inside *Li
 #### Shared memory JSON to string map
 ![sharedMemoryJSONToStringMap.png](Resources/sharedMemoryJSONToStringMap.png)
 
-This node reads from shared memory (Handle Name) of size (Handle Size). It expects the data to be in JSON format. The data is then converted to *Map of Strings to Strings*.
+This node reads from shared memory (*Handle Name*) of size (*Handle Size*). It expects the data to be in JSON format. The data is then converted to *Map of Strings to Strings*.
 
 ### Nodes for writing to shared memory
 #### Open shared memory
@@ -45,6 +45,9 @@ This node is for closing shared memory handle. It should be called once before q
 ![stringExplodeToVector.png](Resources/stringExplodeToVector.png)
 
 This node expects a string representing a 3-component vector (standard *vector* variable in UE) and outputs a *vector* variable. It is useful if you want to transfer *Vec3* variable from Lightact to *vector* variable in UE.
+
+## Tips
+In most cases you'll use just one *Handle Name* throughout your project as you can send many variables through that handle at the same time. In most cases, you'll connect a single **Open Shared Memory** in your main level blueprint (or elsewhere) and connect it to **BeginPlay** node and use one **Close Shared Memory** and connect it to **EndPlay** node.
 
 ## Troubleshooting
 If you encounter any build errors, try opening the *.sln* file in Visual Studio and do a *Clean solution* and then *Build solution*. If these 2 actions succeeded you should be able to open the project.
