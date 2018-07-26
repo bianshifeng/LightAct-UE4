@@ -4,7 +4,7 @@
 	"VersionName": "2.0",
 	"FriendlyName": "Lightact",
 	"Description": "A set of functionalities enabling integration with Lightact media server.",
-	"Category": "Other",
+	"Category": "Lightact",
 	"CreatedBy": "Lightact",
 	"CreatedByURL": "https://lightact-systems.com",
 	"DocsURL": "https://support.lightact-systems.com",
@@ -12,7 +12,8 @@
 	"SupportURL": "https://support.lightact-systems.com",
 	"CanContainContent": true,
 	"IsBetaVersion": false,
-	"Installed": true,
+	"Installed": false,
+	"EnabledByDefault": true,
 	"Modules": [
 		{
 			"Name": "Lightact",
