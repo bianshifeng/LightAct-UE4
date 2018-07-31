@@ -2,7 +2,7 @@
 A set of functionalities enabling integration of Unreal Engine with [Lightact media server](https://lightact-systems.com).
 
 ## Installation
-**Please note: this plugin has been tested with Unreal Engine 4.19. It does not work (yet) with 4.20.**
+**This plugin has been tested with Unreal Engine 4.19 and 4.20.
 
 ### Step 1: Download the plugin
 Download the ZIP archive and copy the plugin folder to the *Plugins* folder in your UE project folder. For a more detailed help see [Installing UE plugins video tutorial](https://www.youtube.com/watch?v=85M2BB-Ct9g&list=PLcNPGta1d2XDcSsz8zcW0f2lPSawnW3mR&t=195s&index=2) or [Installing UE4 Plugins User Guide](https://support.lightact-systems.com/installing-ue4-plugins/).

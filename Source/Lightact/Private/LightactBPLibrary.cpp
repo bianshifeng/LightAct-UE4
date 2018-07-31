@@ -11,7 +11,8 @@
 #include "StringConv.h"
 
 
-#include <Windows.h>
+//#include <Windows.h>
+#include "Windows/MinWindows.h"
 //#include <conio.h>
 //#include <conio.h>
 
@@ -187,8 +188,11 @@ void ULightactBPLibrary::StringExplode(const FString InputString, const FString 
 
 	TArray<FString> OutSplits;
 	int len = InputString.ParseIntoArray(OutSplits, Delimiters.GetCharArray().GetData(), true);
-
-	for (int i = 0; i < min(len, 3); i++) {
+	int minVal;
+	if (len > 3)  minVal = 3;
+	else  minVal = len;
+	//min(len, 3)
+	for (int i = 0; i < minVal; i++) {
 		OutConverts[i] = FCString::Atof(OutSplits[i].GetCharArray().GetData());
 	}
 		
