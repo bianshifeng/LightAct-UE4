@@ -10,12 +10,7 @@
 #include "rapidjson/stringbuffer.h"
 #include "StringConv.h"
 
-
-//#include <Windows.h>
 #include "Windows/MinWindows.h"
-//#include <conio.h>
-//#include <conio.h>
-
 
 
 ULightactBPLibrary::ULightactBPLibrary(const FObjectInitializer& ObjectInitializer)
@@ -178,7 +173,7 @@ void ULightactBPLibrary::closeMemHandle(const FString HandleName, FString& error
 }
 
 /* Splits string by delimiters and returns a composed 3-D space vector. */
-void ULightactBPLibrary::StringExplode(const FString InputString, const FString Delimiters, FVector& Vector) {
+void ULightactBPLibrary::stringToVector(const FString InputString, const FString Delimiters, FVector& Vector) {
 
 	// add default values
 	TArray<float> OutConverts;
@@ -197,5 +192,124 @@ void ULightactBPLibrary::StringExplode(const FString InputString, const FString 
 	}
 		
 	Vector = FVector(OutConverts[0], OutConverts[1], OutConverts[2]);
+}
 
+/* Splits string by delimiters and returns an array of 3-D space vectors. */
+void ULightactBPLibrary::stringToVectorArray(const FString InputString, const FString CompDelimiter, const FString VectorDelimiter, TArray<FVector>& VArray) {
+
+	// add default values
+	TArray<float> OutConverts;
+	OutConverts.Add(0.f);
+	OutConverts.Add(0.f);
+	OutConverts.Add(0.f);
+
+	TArray<FString> VecSplits;
+	int len = InputString.ParseIntoArray(VecSplits, VectorDelimiter.GetCharArray().GetData(), true);
+	for (int i = 0; i < len; i++) {
+		TArray<FString> CompSplits;
+		int len = VecSplits[i].ParseIntoArray(CompSplits, CompDelimiter.GetCharArray().GetData(), true);
+		int minVal;
+		if (len > 3)  minVal = 3;
+		else  minVal = len;
+		//min(len, 3)
+		for (int i = 0; i < minVal; i++) {
+			OutConverts[i] = FCString::Atof(CompSplits[i].GetCharArray().GetData());
+		}
+		VArray.Add(FVector(OutConverts[0], OutConverts[1], OutConverts[2]));
+	}
+}
+
+/*Extrudes contours*/
+void ULightactBPLibrary::extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles) {
+	
+	float currCont = 0;
+	Vertices.Empty(); //here we store all vertices
+	Triangles.Empty();//here we store all triangles
+	int lastVert = 0;
+	FVector contCoG = FVector(0.0f,0.0f,0.0f); //contour Center of Gravity
+	TArray<FVector> upperVertices; //upper plane of extruded contour
+	TArray<FVector> Vertices1Cont; //vertices of one contour
+	TArray<int32> Triangles1Cont; //triangles of one contour
+
+	for (int32 ic = 0; ic != Contours.Num(); ++ic) {
+		
+		if (Contours[ic][0] == currCont) { //if we are still in the same contour (we start with contour 0)
+			Vertices1Cont.Add(FVector(Contours[ic].Y * ScaleX, Contours[ic].Z * ScaleY, 0.0f));
+			contCoG += Vertices1Cont.Last();
+			upperVertices.Add(Vertices1Cont.Last() + FVector(0.0f, 0.0f, height));
+		}
+		if(Contours[ic][0] != currCont || ic >= Contours.Num()-1){ //if we encounter the next contour or reach the end
+			Vertices1Cont.Add(contCoG / Vertices1Cont.Num());
+			upperVertices.Add(Vertices1Cont.Last() + FVector(0.0f, 0.0f, height));
+			Vertices1Cont.Append(upperVertices); //append upper vertices to lower
+			upperVertices.Empty(); //and empty upperVertices so its ready for next iteration
+
+			
+			int contPoints = Vertices1Cont.Num() / 2; //number of points in the contour
+			
+			// we initialize the Triangles1Cont array
+			// it holds all triangles of one contour
+			Triangles1Cont.Empty();
+			Triangles1Cont.SetNum((contPoints-1) * 12); //lots of triangles for one contour
+			int k = 0;
+			int j = 0;
+
+			for (int32 i = 0; i != (contPoints - 1) * 3 - 1; ++i) { // we put a condition here just in case
+				
+				// if true we do the last 2 vertices per plane and break
+				if ((i) == (contPoints - 1) * 3 - 2) { 
+					Triangles1Cont[i] = 0 + lastVert;
+					Triangles1Cont[i + 1] = (contPoints - 1) + lastVert;
+					Triangles1Cont[i + (contPoints - 1) * 3] = 2 * contPoints - 2 + lastVert;
+					Triangles1Cont[i + (contPoints - 1) * 3 + 1] = 2 * contPoints - 1 + lastVert;
+					break;
+				}
+
+				//the last point of all triangles on top and bottom plane is CoG
+				if ((i + 1) % 3 == 0 && (i - 1) != 0) { 
+					Triangles1Cont[i] = contPoints - 1 + lastVert;
+					Triangles1Cont[i + (contPoints - 1) * 3] = 2 * contPoints - 1 + lastVert;
+					++k;
+				}
+				else {
+					Triangles1Cont[i] = i - 2 * k + lastVert;
+					Triangles1Cont[i + (contPoints - 1) * 3] = contPoints * 2 - 2 - i + 2 * k + lastVert;
+					
+					
+					if (i % 3 == 0) { //here we do the triangles on the sides
+						Triangles1Cont[(contPoints - 1 + j) * 6] = i - 2 * j + lastVert;
+						if (j < contPoints - 2) {
+							Triangles1Cont[(contPoints - 1 + j) * 6 + 1] = i - 2 * j + 1 + contPoints + lastVert;
+							Triangles1Cont[(contPoints - 1 + j) * 6 + 2] = i - 2 * j + 1 + lastVert;
+
+							Triangles1Cont[(contPoints - 1 + j) * 6 + 4] = i - 2 * j + contPoints + lastVert;
+							Triangles1Cont[(contPoints - 1 + j) * 6 + 5] = i - 2 * j + 1 + contPoints + lastVert;
+						}
+						else {
+							Triangles1Cont[(contPoints - 1 + j) * 6 + 1] = contPoints + lastVert;
+							Triangles1Cont[(contPoints - 1 + j) * 6 + 2] = 0 + lastVert;
+
+							Triangles1Cont[(contPoints - 1 + j) * 6 + 4] = i - 2 * j + contPoints + lastVert;
+							Triangles1Cont[(contPoints - 1 + j) * 6 + 5] = contPoints + lastVert;
+						}
+
+						Triangles1Cont[(contPoints - 1 + j) * 6 + 3] = i - 2 * j + lastVert;
+						j++;
+					}
+				}
+			}
+
+			/*Reset things and either break or loop back*/
+			contCoG = FVector(0.0f, 0.0f, 0.0f); // reset CoG
+			lastVert += 2 * contPoints; //lastVertice from current contour
+			currCont = Contours[ic][0];
+			Vertices.Append(Vertices1Cont);
+			Vertices1Cont.Empty();
+			Triangles.Append(Triangles1Cont);
+			if (ic >= Contours.Num() - 1)
+				break;
+			else
+				--ic;
+		}		
+	}	
 }

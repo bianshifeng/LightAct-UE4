@@ -39,6 +39,12 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Close shared memory", Keywords = "Close shared memory handle JSON", ToolTip = "Closes shared memory handle. Usually connected to OnEndPlay. Handle has to be opened before."), Category = "Lightact")
 		static void closeMemHandle(const FString HandleName, FString& error, bool& Success);
 
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "String explode to Vector", Keywords = "Lightact string explode to vector", ToolTip = "Splits string by delimiters and returns a composed 3-D space vector."), Category = "Lightact")
-	static void StringExplode(const FString InputString, const FString Delimiters, FVector& Vector);
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector", Keywords = "Lightact string explode to vector", ToolTip = "Splits string by delimiters and returns a composed 3-D space vector."), Category = "Lightact")
+	static void stringToVector(const FString InputString, const FString Delimiters, FVector& Vector);
+
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector Array", Keywords = "Lightact string explode to vector array", ToolTip = "Splits string by delimiters and returns an array of 3-D space vectors."), Category = "Lightact")
+		static void stringToVectorArray(const FString InputString, const FString CompDelimiter, const FString VectorDelimiter, TArray<FVector>& Vector);
+	
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "Extrude Contours", Keywords = "Lightact extrude contours vector array", ToolTip = "Extrudes contours and creates array of vertices and triangles. Connect these to Create Mesh Section."), Category = "Lightact")
+		static void extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles);
 };
