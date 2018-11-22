@@ -41,10 +41,18 @@ This node is used to write data to shared memory handle. It takes in a *Map of S
 This node is for closing shared memory handle. It should be called once before quitting the game. The *Handle Name* property should be the same as in the *Open shared memory* node. In most cases you'll want to connect it to **Event EndPlay** node.
 
 ### Utility nodes
-#### String explode to Vector
-![stringExplodeToVector.png](Resources/stringExplodeToVector.png)
+#### String to Vector
+![stringToVector.png](Resources/stringToVector.png)
 
-This node expects a string representing a 3-component vector (standard *vector* variable in UE) and outputs a *vector* variable. It is useful if you want to transfer *Vec3* variable from Lightact to *vector* variable in UE.
+This node expects a string representing a 3-component vector (standard *Vector* variable in UE) and outputs a *Vector* variable. It is useful if you want to transfer *Vec3* variable from Lightact to *vector* variable in UE.
+#### String to Vector Array
+![stringToVectorArray.png](Resources/stringToVectorArray.png)
+
+This node expects a string representing an array of 3-component vectors (standard *Vector* variable in UE) and outputs an *Array of Vectors* variable. It is useful if you want to transfer an *Array of Vec3* variable from Lightact to *Array of Vectors* variable in UE.
+#### Extrude Contours
+![extrudeContours.png](Resources/extrudeContours.png)
+
+This node expects an *Array of Vectors* where each vector in the array represents _x,y,i_ of a contour, where _x_ is the x coordinate, y is the y coordinate and i is the index of a contour. Therefore the Contours Array of Vectors input can represent several contours. The node outputs an Array of Vectors representing Vertices of a mesh and an Array of Integers representing the Triangles. These can be connected into *Create Mesh Section* node to create a mesh. This node can be used to create 3D meshes in Unreal Engine based on the outputs of Find contours node in Lightact.
 
 ## Tips
 In most cases you'll use just one *Handle Name* throughout your project as you can send many variables through that handle at the same time. In most cases, you'll connect a single **Open Shared Memory** in your main level blueprint (or elsewhere) and connect it to **BeginPlay** node and use one **Close Shared Memory** and connect it to **EndPlay** node.
@@ -54,6 +62,4 @@ If you encounter any build errors, try opening the *.sln* file in Visual Studio 
 
 ## Additional help
 Additional help is available on:
-- [Lightact YouTube UE Playlist](https://www.youtube.com/playlist?list=PLcNPGta1d2XDcSsz8zcW0f2lPSawnW3mR)
-- [User Guide](https://support.lightact-systems.com/unreal-engine-and-lightact-media-server-integration/)
-- [Quick Start Guide](https://support.lightact-systems.com/integrate-lightact-unreal-engine/)
+- [User Guide](https://support.lightact-systems.com/)
