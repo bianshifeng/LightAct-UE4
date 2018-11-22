@@ -52,7 +52,9 @@ This node expects a string representing an array of 3-component vectors (standar
 #### Extrude Contours
 ![extrudeContours.png](Resources/extrudeContours.png)
 
-This node expects an *Array of Vectors* where each vector in the array represents _x,y,i_ of a contour, where _x_ is the x coordinate, y is the y coordinate and i is the index of a contour. Therefore the Contours Array of Vectors input can represent several contours. The node outputs an Array of Vectors representing Vertices of a mesh and an Array of Integers representing the Triangles. These can be connected into *Create Mesh Section* node to create a mesh. This node can be used to create 3D meshes in Unreal Engine based on the outputs of Find contours node in Lightact.
+This node expects an *Array of Vectors* where each vector in the array represents _[x,y,i]_ of a contour, where _x_ is the x coordinate, _y_ is the y coordinate and _i_ is the index of a contour. Therefore the *_Contours_ Array of Vectors* input can represent several contours. 
+
+The node outputs an Array of Vectors representing *Vertices* of a mesh and an Array of Integers representing the *Triangles*. These can be connected into **Create Mesh Section** node to create a mesh. This node can be used to create 3D meshes in Unreal Engine based on the outputs of Find contours node in Lightact.
 
 ## Tips
 In most cases you'll use just one *Handle Name* throughout your project as you can send many variables through that handle at the same time. In most cases, you'll connect a single **Open Shared Memory** in your main level blueprint (or elsewhere) and connect it to **BeginPlay** node and use one **Close Shared Memory** and connect it to **EndPlay** node.
@@ -62,4 +64,4 @@ If you encounter any build errors, try opening the *.sln* file in Visual Studio 
 
 ## Additional help
 Additional help is available on:
-- [User Guide](https://support.lightact-systems.com/)
+- [Lightact Support](https://support.lightact-systems.com/) : Head to our Support page where you have a User Guide, a Light Academy video tutorials and other resources.   
