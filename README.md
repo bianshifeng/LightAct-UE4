@@ -48,13 +48,13 @@ This node expects a string representing a 3-component vector (standard *Vector* 
 #### String to Vector Array
 ![stringToVectorArray.png](Resources/stringToVectorArray.png)
 
-This node expects a string representing an array of 3-component vectors (standard *Vector* variable in UE) and outputs an *Array of Vectors* variable. It is useful if you want to transfer an *Array of Vec3* variable from Lightact to *Array of Vectors* variable in UE.
+This node expects a string representing an array of 3-component vectors (standard *Vector* variable in UE) and outputs an *Array of Vectors* variable. It is useful if you want to transfer an *Array of Vec3* variable from Lightact to *Array of Vectors* variable in UE. For example, [Find circles](https://support.lightact-systems.com/find-circles-and-contours/) node in Lightact outputs an *Array of Vec3* where x represents x-coordinate of circle's center, y represents y-coordinate of circle's center and z represents the radius of the circle.
 #### Extrude Contours
 ![extrudeContours.png](Resources/extrudeContours.png)
 
 This node expects an *Array of Vectors* where each vector in the array represents _[x,y,i]_ of a contour, where _x_ is the x coordinate, _y_ is the y coordinate and _i_ is the index of a contour. Therefore the *_Contours_ Array of Vectors* input can represent several contours. 
 
-The node outputs an Array of Vectors representing *Vertices* of a mesh and an Array of Integers representing the *Triangles*. These can be connected into **Create Mesh Section** node to create a mesh. This node can be used to create 3D meshes in Unreal Engine based on the outputs of Find contours node in Lightact.
+The node outputs an *Array of Vectors* representing **Vertices** of a mesh and an *Array of Integers* representing the **Triangles**. These can be connected into a **Create Mesh Section** node to create a mesh. Therefore, **Extrude Contours** node is usually used to 3D meshes in Unreal Engine based on the outputs of [Find contours](https://support.lightact-systems.com/find-circles-and-contours/) node in Lightact.
 
 ## Tips
 In most cases you'll use just one *Handle Name* throughout your project as you can send many variables through that handle at the same time. In most cases, you'll connect a single **Open Shared Memory** in your main level blueprint (or elsewhere) and connect it to **BeginPlay** node and use one **Close Shared Memory** and connect it to **EndPlay** node.
