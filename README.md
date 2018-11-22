@@ -24,7 +24,7 @@ The plugin adds a number of new Blueprint nodes. You'll find them all inside *Li
 #### Shared memory JSON to string map
 ![sharedMemoryJSONToStringMap.png](Resources/sharedMemoryJSONToStringMap.png)
 
-This node reads from shared memory (*Handle Name*) of size (*Handle Size*). It expects the data to be in JSON format. The data is then converted to *Map of Strings to Strings*.
+This node reads from shared memory (**Handle Name**) of size (**Handle Size**). It expects the data to be in JSON format. The data is then converted to *Map of Strings to Strings*.
 
 ### Nodes for writing to shared memory
 #### Open shared memory
@@ -38,21 +38,23 @@ This node is used to write data to shared memory handle. It takes in a *Map of S
 #### Close shared memory
 ![closeSharedMemory.png](Resources/closeSharedMemory.png)
 
-This node is for closing shared memory handle. It should be called once before quitting the game. The *Handle Name* property should be the same as in the *Open shared memory* node. In most cases you'll want to connect it to **Event EndPlay** node.
+This node is for closing shared memory handle. It should be called once before quitting the game. The **Handle Name** property should be the same as in the **Open shared memory** node. In most cases you'll want to connect it to **Event EndPlay** node.
 
 ### Utility nodes
 #### String to Vector
 ![stringToVector.png](Resources/stringToVector.png)
 
-This node expects a string representing a 3-component vector (standard *Vector* variable in UE) and outputs a *Vector* variable. It is useful if you want to transfer *Vec3* variable from Lightact to *vector* variable in UE.
+This node expects a string representing a 3-component vector (a standard *Vector* variable in UE) and outputs a *Vector* variable. It is useful if you want to transfer a *Vec3* variable from Lightact to a *vector* variable in UE.
 #### String to Vector Array
 ![stringToVectorArray.png](Resources/stringToVectorArray.png)
 
-This node expects a string representing an array of 3-component vectors (standard *Vector* variable in UE) and outputs an *Array of Vectors* variable. It is useful if you want to transfer an *Array of Vec3* variable from Lightact to *Array of Vectors* variable in UE. For example, [Find circles](https://support.lightact-systems.com/find-circles-and-contours/) node in Lightact outputs an *Array of Vec3* where x represents x-coordinate of circle's center, y represents y-coordinate of circle's center and z represents the radius of the circle.
+This node expects a string representing an array of 3-component vectors (standard *Vector* variable in UE) and outputs an *Array of Vectors* variable. It is useful if you want to transfer an *Array of Vec3* variable from Lightact to *Array of Vectors* variable in UE. 
+
+For example, [Find circles](https://support.lightact-systems.com/find-circles-and-contours/) node in Lightact outputs an *Array of Vec3* where x represents x-coordinate of circle's center, y represents y-coordinate of circle's center and z represents the radius of the circle.
 #### Extrude Contours
 ![extrudeContours.png](Resources/extrudeContours.png)
 
-This node expects an *Array of Vectors* where each vector in the array represents _[x,y,i]_ of a contour, where _x_ is the x coordinate, _y_ is the y coordinate and _i_ is the index of a contour. Therefore the *_Contours_ Array of Vectors* input can represent several contours. 
+This node expects an *Array of Vectors* where each vector in the array represents _[x,y,i]_ of a contour, where _x_ is the x coordinate, _y_ is the y coordinate and _i_ is the index of a contour. Therefore the **Contours** *Array of Vectors* input can represent several contours. 
 
 The node outputs an *Array of Vectors* representing **Vertices** of a mesh and an *Array of Integers* representing the **Triangles**. These can be connected into a **Create Mesh Section** node to create a mesh. Therefore, **Extrude Contours** node is usually used to 3D meshes in Unreal Engine based on the outputs of [Find contours](https://support.lightact-systems.com/find-circles-and-contours/) node in Lightact.
 
