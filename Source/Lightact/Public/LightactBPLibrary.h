@@ -44,6 +44,12 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector Array", Keywords = "Lightact string explode to vector array", ToolTip = "Splits string by delimiters and returns an array of 3-D space vectors."), Category = "Lightact")
 		static void stringToVectorArray(const FString InputString, const FString CompDelimiter, const FString VectorDelimiter, TArray<FVector>& Vector);
+
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Integer Array", Keywords = "Lightact string explode to integer array", ToolTip = "Splits string by delimiters and returns an array of integers."), Category = "Lightact")
+		static void stringToIntArray(const FString InputString, const FString Delimiter, TArray<int>& IntArr);
+	
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Float Array", Keywords = "Lightact string explode to float array", ToolTip = "Splits string by delimiters and returns an array of floats."), Category = "Lightact")
+		static void stringToFloatArray(const FString InputString, const FString Delimiter, TArray<float>& FloatArr);
 	
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "Extrude Contours", Keywords = "Lightact extrude contours vector array", ToolTip = "Extrudes contours and creates array of vertices and triangles. Connect these to Create Mesh Section."), Category = "Lightact")
 		static void extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles);

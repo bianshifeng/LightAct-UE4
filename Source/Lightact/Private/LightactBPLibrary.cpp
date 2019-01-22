@@ -219,6 +219,41 @@ void ULightactBPLibrary::stringToVectorArray(const FString InputString, const FS
 	}
 }
 
+/* Splits string by delimiters and returns an array of integers. */
+void ULightactBPLibrary::stringToIntArray(const FString InputString, const FString Delimiter, TArray<int>& IntArr) {
+
+	if (Delimiter == "")
+		return;
+
+	// add default values
+	int temp = 0;
+
+	TArray<FString> StringArr;
+	int len = InputString.ParseIntoArray(StringArr, Delimiter.GetCharArray().GetData(), true);
+	for (int i = 0; i < len; i++) {
+		temp = FCString::Atoi(StringArr[i].GetCharArray().GetData());
+		IntArr.Add(temp);		
+	}
+}
+
+/* Splits string by delimiters and returns an array of floats. */
+void ULightactBPLibrary::stringToFloatArray(const FString InputString, const FString Delimiter, TArray<float>& FloatArr) {
+
+	if (Delimiter == "")
+		return;
+
+	// add default values
+	float temp = 0.f;
+	
+
+	TArray<FString> StringArr;
+	int len = InputString.ParseIntoArray(StringArr, Delimiter.GetCharArray().GetData(), true);
+	for (int i = 0; i < len; i++) {
+		temp = FCString::Atof(StringArr[i].GetCharArray().GetData());
+		FloatArr.Add(temp);
+	}
+}
+
 /*Extrudes contours*/
 void ULightactBPLibrary::extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles) {
 	
