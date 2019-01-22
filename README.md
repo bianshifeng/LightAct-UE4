@@ -51,6 +51,14 @@ This node expects a string representing a 3-component vector (a standard *Vector
 This node expects a string representing an array of 3-component vectors (standard *Vector* variable in UE) and outputs an *Array of Vectors* variable. It is useful if you want to transfer an *Array of Vec3* variable from Lightact to *Array of Vectors* variable in UE. 
 
 For example, [Find circles](https://support.lightact-systems.com/find-circles-and-contours/) node in Lightact outputs an *Array of Vec3* where x represents x-coordinate of circle's center, y represents y-coordinate of circle's center and z represents the radius of the circle.
+#### String to Integer Array
+![stringToIntArray.png](Resources/stringToIntArray.png)
+
+This node expects a string representing an array of integers delimited with a Delimiter. It outputs an *Array of Integers*. It is useful, for example, if you want to transfer a *Art-Net* channels from Lightact to UE.
+#### String to Float Array
+![stringToFloatArray.png](Resources/stringToFloatArray.png)
+
+This node expects a string representing an array of floats delimited with a Delimiter. It outputs an *Array of Floats*. It is useful, for example, if you want to transfer the results of *FFT analysis* (audio spectral analysis)  from Lightact to UE.
 #### Extrude Contours
 ![extrudeContours.png](Resources/extrudeContours.png)
 
