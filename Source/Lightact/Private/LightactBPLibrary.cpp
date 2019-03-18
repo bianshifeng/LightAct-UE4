@@ -11,6 +11,7 @@
 #include "StringConv.h"
 
 #include "Windows/MinWindows.h"
+#include "time.h"
 
 
 ULightactBPLibrary::ULightactBPLibrary(const FObjectInitializer& ObjectInitializer)
@@ -347,4 +348,16 @@ void ULightactBPLibrary::extrudeContours(TArray<FVector> Contours, float height,
 				--ic;
 		}		
 	}	
+}
+
+/* Splits string by delimiters and returns an array of floats. */
+void ULightactBPLibrary::lightactProcessTick(FString& Value) {
+
+	struct tm * timeinfo;
+	time_t currTime;	
+	time(&currTime);
+
+	timeinfo = localtime(&currTime);
+	Value = FString::Printf(TEXT("%02d:%02d:%02d"), timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	
 }

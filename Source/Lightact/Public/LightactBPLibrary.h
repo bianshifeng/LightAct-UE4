@@ -28,10 +28,10 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 	GENERATED_UCLASS_BODY()
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Shared memory JSON to string map", Keywords = "Lightact shared memory JSON to string map", ToolTip = "Reads a JSON string from shared memory file and outputs a map of strings to strings."), Category = "Lightact")
-	static void BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& ResultMap, bool& Success);
+		static void BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& ResultMap, bool& Success);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Open shared memory", Keywords = "Open shared memory handle JSON", ToolTip = "Opens shared memory handle. Usually connected to OnBeginPlay. Handle has to be closed on EndPlay."), Category = "Lightact")
-	static void createMemHandle(const FString HandleName, const int HandleSize, FString& error, bool& Success);
+		static void createMemHandle(const FString HandleName, const int HandleSize, FString& error, bool& Success);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Write to shared memory", Keywords = "Write string map to Lightact shared memory JSON", ToolTip = "Converts a string map to JSON and writes it to shared memory"), Category = "Lightact")
 		static void writeSharedMemory(TMap<FString, FString> stringMap, const FString HandleName, const int HandleSize, FString& error, bool& success);
@@ -40,7 +40,7 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 		static void closeMemHandle(const FString HandleName, FString& error, bool& Success);
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector", Keywords = "Lightact string explode to vector", ToolTip = "Splits string by delimiters and returns a composed 3-D space vector."), Category = "Lightact")
-	static void stringToVector(const FString InputString, const FString Delimiters, FVector& Vector);
+		static void stringToVector(const FString InputString, const FString Delimiters, FVector& Vector);
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector Array", Keywords = "Lightact string explode to vector array", ToolTip = "Splits string by delimiters and returns an array of 3-D space vectors."), Category = "Lightact")
 		static void stringToVectorArray(const FString InputString, const FString CompDelimiter, const FString VectorDelimiter, TArray<FVector>& Vector);
@@ -53,4 +53,8 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 	
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "Extrude Contours", Keywords = "Lightact extrude contours vector array", ToolTip = "Extrudes contours and creates array of vertices and triangles. Connect these to Create Mesh Section."), Category = "Lightact")
 		static void extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles);
+
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "Lightact Tick", Keywords = "Lightact process heartbeat", ToolTip = "Creates a Lightact tick heartbeat value."), Category = "Lightact")
+		static void lightactProcessTick(FString& Heartbeat);
+
 };
