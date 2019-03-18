@@ -350,7 +350,7 @@ void ULightactBPLibrary::extrudeContours(TArray<FVector> Contours, float height,
 	}	
 }
 
-/* Splits string by delimiters and returns an array of floats. */
+/* Construct a simple string for Lightact heartbeat signal. It uses current system time. */
 void ULightactBPLibrary::lightactProcessTick(FString& Value) {
 
 	struct tm * timeinfo;
