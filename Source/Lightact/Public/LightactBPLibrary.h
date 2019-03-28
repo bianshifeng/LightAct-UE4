@@ -55,6 +55,6 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 		static void extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles);
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "Lightact Tick", Keywords = "Lightact process heartbeat", ToolTip = "Creates a Lightact tick heartbeat value."), Category = "Lightact")
-		static void lightactProcessTick(FString& Heartbeat);
+		static void lightactProcessTick(int& Heartbeat);
 
 };

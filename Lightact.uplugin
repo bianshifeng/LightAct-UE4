@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 4,
-	"VersionName": "2.2",
+	"Version": 5,
+	"VersionName": "2.3",
 	"FriendlyName": "Lightact",
 	"Description": "A set of functionalities enabling integration with Lightact media server.",
 	"Category": "Lightact",

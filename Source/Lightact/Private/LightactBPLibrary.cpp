@@ -351,13 +351,13 @@ void ULightactBPLibrary::extrudeContours(TArray<FVector> Contours, float height,
 }
 
 /* Construct a simple string for Lightact heartbeat signal. It uses current system time. */
-void ULightactBPLibrary::lightactProcessTick(FString& Value) {
+void ULightactBPLibrary::lightactProcessTick(int& Value) {
 
 	struct tm * timeinfo;
 	time_t currTime;	
 	time(&currTime);
 
 	timeinfo = localtime(&currTime);
-	Value = FString::Printf(TEXT("%02d:%02d:%02d"), timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	Value = timeinfo->tm_sec + 60 * timeinfo->tm_min + 60 * 60 * timeinfo->tm_hour;
 	
 }
