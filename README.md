@@ -2,10 +2,11 @@
 A set of functionalities enabling integration of Unreal Engine with [Lightact media server](https://lightact-systems.com).
 
 ## Installation
-**This plugin has been tested with Unreal Engine 4.19, 4.20 and 4.21 together with Visual Studio 2017.**
+**This plugin has been tested with Unreal Engine 4.19, 4.20, 4.21, 4.22 and 4.23 together with Visual Studio 2017.**
 
-### Step 1: Download the plugin
-Download the ZIP archive and copy the plugin folder to the *Plugins* folder in your UE project folder. For a more detailed help see [Installing UE plugins video tutorial](https://www.youtube.com/watch?v=85M2BB-Ct9g&list=PLcNPGta1d2XDcSsz8zcW0f2lPSawnW3mR&t=195s&index=2) or [Installing UE4 Plugins User Guide](https://support.lightact-systems.com/installing-ue4-plugins/).
+### Step 1: Clone or Download the repository
+Clone the repository in the Plugins folder of your project.
+If you don't know what 'Clone' means, just download the ZIP archive and copy the folder to the *Plugins* folder in your UE project folder. For a more detailed help see [Installing UE plugins video tutorial](https://www.youtube.com/watch?v=85M2BB-Ct9g&list=PLcNPGta1d2XDcSsz8zcW0f2lPSawnW3mR&t=195s&index=2) or [Installing UE4 Plugins User Guide](https://support.lightact-systems.com/installing-ue4-plugins/).
 
 ### Step 2: Regenerate project files and build the plugin
 When you download the plugin files you need to *Regenerate Visual Studio project files*. You do that by right-clicking on the .uproject file. If you don't see this option, your UE project does not contain any code.
@@ -18,7 +19,9 @@ When you are done, double click on the .uproject file to open it in the UE Edito
 When you are done and the UE Editor opens, make sure the Plugin is enabled. You might need to restart the UE Editor. If you are successful you'll see a new *Lightact* node category in your blueprints.
 
 ## Usage
-The plugin adds a number of new Blueprint nodes. You'll find them all inside *Lightact* category.
+The plugin adds a number of new Blueprint nodes. You'll find them all inside *Lightact* category. 
+
+Below, we list some (but not all) of them.
 
 ### Nodes for reading from shared memory
 #### Shared memory JSON to string map
@@ -71,6 +74,7 @@ In most cases you'll use just one *Handle Name* throughout your project as you c
 
 ## Troubleshooting
 If you encounter any build errors, try opening the *.sln* file in Visual Studio and do a *Clean solution* and then *Build solution*. If these 2 actions succeeded you should be able to open the project.
+If you have any questions, please ask them on [Lightact Answerhub](https://answerhub.lightact-systems.com/)
 
 ## Additional help
 Additional help is available on:
