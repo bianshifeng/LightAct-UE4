@@ -57,4 +57,7 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "Lightact Tick", Keywords = "Lightact process heartbeat", ToolTip = "Creates a Lightact tick heartbeat value."), Category = "Lightact")
 		static void lightactProcessTick(int& Heartbeat);
 
+    UFUNCTION(BlueprintCallable, meta = (DisplayName = "openFileDialog", Keywords = "Open File Dialog", ToolTip = "Opens a file dialog and returns pointer to it"), Category = "FileDialog")
+        static void openFileDialog(const FString& DialogTitle, const FString& DefaultPath, const FString& FileTypes, TArray<FString>& OutFileNames);
+
 };
