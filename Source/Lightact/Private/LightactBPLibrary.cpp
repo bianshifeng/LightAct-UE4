@@ -377,6 +377,8 @@ void ULightactBPLibrary::openFileDialog(const FString& DialogTitle, const FStrin
 
         uint32 SelectionFlag = 0;
 
+        FTransform Transform;
+
         DesktopPlatform->OpenFileDialog(ParentWindowHandle, DialogTitle, DefaultPath, FString(""), FileTypes, SelectionFlag, OutFileNames);
     }
 }
