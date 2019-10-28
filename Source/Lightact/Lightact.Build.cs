@@ -43,6 +43,8 @@ public class Lightact : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+                "ApplicationCore",
+                "DesktopPlatform"
 
 				// ... add private dependencies that you statically link with here ...	
 			}
