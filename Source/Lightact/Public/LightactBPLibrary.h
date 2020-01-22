@@ -27,34 +27,34 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Shared memory JSON to string map", Keywords = "Lightact shared memory JSON to string map", ToolTip = "Reads a JSON string from shared memory file and outputs a map of strings to strings."), Category = "Lightact")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Shared memory JSON to string map", Keywords = "LightAct shared memory JSON to string map", ToolTip = "Reads a JSON string from shared memory file and outputs a map of strings to strings."), Category = "LightAct")
 		static void BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& ResultMap, bool& Success);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Open shared memory", Keywords = "Open shared memory handle JSON", ToolTip = "Opens shared memory handle. Usually connected to OnBeginPlay. Handle has to be closed on EndPlay."), Category = "Lightact")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Open shared memory", Keywords = "Open shared memory handle JSON", ToolTip = "Opens shared memory handle. Usually connected to OnBeginPlay. Handle has to be closed on EndPlay."), Category = "LightAct")
 		static void createMemHandle(const FString HandleName, const int HandleSize, FString& error, bool& Success);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Write to shared memory", Keywords = "Write string map to Lightact shared memory JSON", ToolTip = "Converts a string map to JSON and writes it to shared memory"), Category = "Lightact")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Write to shared memory", Keywords = "Write string map to LightAct shared memory JSON", ToolTip = "Converts a string map to JSON and writes it to shared memory"), Category = "LightAct")
 		static void writeSharedMemory(TMap<FString, FString> stringMap, const FString HandleName, const int HandleSize, FString& error, bool& success);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Close shared memory", Keywords = "Close shared memory handle JSON", ToolTip = "Closes shared memory handle. Usually connected to OnEndPlay. Handle has to be opened before."), Category = "Lightact")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Close shared memory", Keywords = "Close shared memory handle JSON", ToolTip = "Closes shared memory handle. Usually connected to OnEndPlay. Handle has to be opened before."), Category = "LightAct")
 		static void closeMemHandle(const FString HandleName, FString& error, bool& Success);
 
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector", Keywords = "Lightact string explode to vector", ToolTip = "Splits string by delimiters and returns a composed 3-D space vector."), Category = "Lightact")
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector", Keywords = "LightAct string explode to vector", ToolTip = "Splits string by delimiters and returns a composed 3-D space vector."), Category = "LightAct")
 		static void stringToVector(const FString InputString, const FString Delimiters, FVector& Vector);
 
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector Array", Keywords = "Lightact string explode to vector array", ToolTip = "Splits string by delimiters and returns an array of 3-D space vectors."), Category = "Lightact")
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector Array", Keywords = "LightAct string explode to vector array", ToolTip = "Splits string by delimiters and returns an array of 3-D space vectors."), Category = "LightAct")
 		static void stringToVectorArray(const FString InputString, const FString CompDelimiter, const FString VectorDelimiter, TArray<FVector>& Vector);
 
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Integer Array", Keywords = "Lightact string explode to integer array", ToolTip = "Splits string by delimiters and returns an array of integers."), Category = "Lightact")
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Integer Array", Keywords = "LightAct string explode to integer array", ToolTip = "Splits string by delimiters and returns an array of integers."), Category = "LightAct")
 		static void stringToIntArray(const FString InputString, const FString Delimiter, TArray<int>& IntArr);
 	
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Float Array", Keywords = "Lightact string explode to float array", ToolTip = "Splits string by delimiters and returns an array of floats."), Category = "Lightact")
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Float Array", Keywords = "LightAct string explode to float array", ToolTip = "Splits string by delimiters and returns an array of floats."), Category = "LightAct")
 		static void stringToFloatArray(const FString InputString, const FString Delimiter, TArray<float>& FloatArr);
 	
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "Extrude Contours", Keywords = "Lightact extrude contours vector array", ToolTip = "Extrudes contours and creates array of vertices and triangles. Connect these to Create Mesh Section."), Category = "Lightact")
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "Extrude Contours", Keywords = "LightAct extrude contours vector array", ToolTip = "Extrudes contours and creates array of vertices and triangles. Connect these to Create Mesh Section."), Category = "LightAct")
 		static void extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles);
 
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "Lightact Tick", Keywords = "Lightact process heartbeat", ToolTip = "Creates a Lightact tick heartbeat value."), Category = "Lightact")
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "LightAct Tick", Keywords = "LightAct process heartbeat", ToolTip = "Creates a LightAct tick heartbeat value."), Category = "LightAct")
 		static void lightactProcessTick(int& Heartbeat);
 
     UFUNCTION(BlueprintCallable, meta = (DisplayName = "openFileDialog", Keywords = "Open File Dialog", ToolTip = "Opens a file dialog and returns pointer to it"), Category = "FileDialog")
