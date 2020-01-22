@@ -2,7 +2,7 @@ import unreal
 import json
 import os
 import sys
-
+import math
 
 ADDITIONAL_OBJECTS_LABEL = 'LightAct_3D_View_additional_objects'
 PROJECTORS_LABEL = 'LightAct_3D_View_Projector_Object'
@@ -43,7 +43,8 @@ def set_up_projector(projector_info, projector_actor, projector_render_target):
     projector_name = projector_info[GENERAL_OBJECT_DATA_LABEL]['name']
     
     projector_general_data = projector_info[GENERAL_OBJECT_DATA_LABEL]
-           
+    
+    # reading location of the projector. They are in LightAct coordinate system.
     location_x = projector_general_data['location_x']
     location_y = projector_general_data['location_y']
     location_z = projector_general_data['location_z']
@@ -52,27 +53,22 @@ def set_up_projector(projector_info, projector_actor, projector_render_target):
     # swap coordinates since Lightact has Y up, -Z forward , X right coordinate system
     projector_location = unreal.Vector(-projector_location.z, projector_location.x, projector_location.y)
 
-
-    rotation_roll = projector_general_data['rot_roll']
-    rotation_pitch = projector_general_data['rot_pitch']
-    rotation_yaw = projector_general_data['rot_yaw']
-    
-    # swap roll and pitch since Lightact has Gimbal lock problem
-    projector_rotation = unreal.Rotator(rotation_pitch, rotation_roll, -rotation_yaw) 
-  
-    
+    # lightact .la file includes quaternions in UE4 coordinate system.    
+    Quat_x = projector_info['Projector_ue4Quat_X']
+    Quat_y = projector_info['Projector_ue4Quat_Y']
+    Quat_z = projector_info['Projector_ue4Quat_Z']
+    Quat_w = projector_info['Projector_ue4Quat_W']
+    ue4Quat=unreal.Quat(Quat_x,Quat_y,Quat_z,Quat_w)
+    # unreal.log(ue4Quat)
+    projector_rotation=ue4Quat.rotator() 
     projector_transform = unreal.Transform(projector_location, projector_rotation, unreal.Vector(1, 1, 1))
-    
-    
     projector_actor.set_actor_transform(projector_transform, False, True)
-    
-    
+ 
     projector_resolution_x = projector_info['Projector_resolution_x']
     projector_resolution_y = projector_info['Projector_resolution_y']
-    projector_vertical_fov_deg = float(projector_info['Projector_vertical_fov_deg'])
     
-    
-    projector_horizontal_fov_deg = projector_vertical_fov_deg * (projector_resolution_x / projector_resolution_y)
+    projector_horizontal_fov_deg = float(projector_info['Projector_horizontal_fov_deg'])
+    print("HORIZONTAL FOV: {0}".format(projector_horizontal_fov_deg))
     
     capture_component2d = projector_actor.capture_component2d
     capture_component2d.fov_angle = projector_horizontal_fov_deg
@@ -125,10 +121,10 @@ if __name__ == "__main__":
         print('Please path to .la file and location scale modifier')
         exit(-1)
         
-
+    print ('smo tukaj 1')
     input_filename = sys.argv[1]
     location_scale = float(sys.argv[2])    
-
+    print ('smo tukaj 2')
 
     set_up_scene(input_filename, location_scale)
 
