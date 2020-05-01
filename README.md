@@ -2,7 +2,7 @@
 A set of functionalities enabling integration of Unreal Engine with [LightAct media server](https://lightact-systems.com).
 
 ## Installation
-**This plugin has been tested with Unreal Engine 4.19, 4.20, 4.21, 4.22 and 4.23 together with Visual Studio 2017.**
+**This plugin has been tested with Unreal Engine 4.19, 4.20, 4.21, 4.22, 4.23 and 4.24 together with Visual Studio 2017.**
 
 ### Step 1: Clone or Download the repository
 Clone the repository in the Plugins folder of your project.
