@@ -43,7 +43,7 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 		static void stringToVector(const FString InputString, const FString Delimiters, FVector& Vector);
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Vector Array", Keywords = "LightAct string explode to vector array", ToolTip = "Splits string by delimiters and returns an array of 3-D space vectors."), Category = "LightAct")
-		static void stringToVectorArray(const FString InputString, const FString CompDelimiter, const FString VectorDelimiter, TArray<FVector>& Vector);
+		static void stringToVectorArray(const FString InputString, const FString ComponentDelimiter, const FString VectorDelimiter, TArray<FVector>& Vector);
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Integer Array", Keywords = "LightAct string explode to integer array", ToolTip = "Splits string by delimiters and returns an array of integers."), Category = "LightAct")
 		static void stringToIntArray(const FString InputString, const FString Delimiter, TArray<int>& IntArr);

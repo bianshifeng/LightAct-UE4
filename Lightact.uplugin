@@ -1,24 +1,24 @@
 {
-	"FileVersion": 3,
-	"Version": 6,
-	"VersionName": "2.4",
-	"FriendlyName": "Lightact",
-	"Description": "A set of functionalities enabling integration with Lightact media server.",
-	"Category": "Lightact",
-	"CreatedBy": "Lightact",
-	"CreatedByURL": "https://lightact-systems.com",
-	"DocsURL": "https://support.lightact-systems.com",
-	"MarketplaceURL": "",
-	"SupportURL": "https://support.lightact-systems.com",
-	"CanContainContent": true,
-	"IsBetaVersion": false,
-	"Installed": false,
-	"EnabledByDefault": true,
-	"Modules": [
-		{
-			"Name": "Lightact",
-			"Type": "Runtime",
-			"LoadingPhase": "PreLoadingScreen"
-		}
-	]
+  "FileVersion": 3,
+  "Version": 7,
+  "VersionName": "2.5",
+  "FriendlyName": "LightAct",
+  "Description": "A set of functionalities enabling integration with LightAct media server.",
+  "Category": "LightAct",
+  "CreatedBy": "LightAct",
+  "CreatedByURL": "https://lightact.io",
+  "DocsURL": "https://lightact.io/docs/",
+  "MarketplaceURL": "",
+  "SupportURL": "https://lightact.io/support/",
+  "CanContainContent": true,
+  "IsBetaVersion": false,
+  "Installed": false,
+  "EnabledByDefault": true,
+  "Modules": [
+    {
+      "Name": "LightAct",
+      "Type": "Runtime",
+      "LoadingPhase": "PreLoadingScreen"
+    }
+  ]
 }

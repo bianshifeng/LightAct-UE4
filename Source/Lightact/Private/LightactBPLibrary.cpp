@@ -4,11 +4,11 @@
 #include "Lightact.h"
 
 #define RAPIDJSON_HAS_STDSTRING 1
-#include "rapidjson/writer.h"
-#include "rapidjson/rapidjson.h"
-#include "rapidjson/document.h"
-#include "rapidjson/stringbuffer.h"
-#include "StringConv.h"
+#include "../rapidjson/writer.h"
+#include "../rapidjson/rapidjson.h"
+#include "../rapidjson/document.h"
+#include "../rapidjson/stringbuffer.h"
+#include "Containers/StringConv.h"
 
 #include "Windows/MinWindows.h"
 #include "time.h"
@@ -199,7 +199,7 @@ void ULightactBPLibrary::stringToVector(const FString InputString, const FString
 }
 
 /* Splits string by delimiters and returns an array of 3-D space vectors. */
-void ULightactBPLibrary::stringToVectorArray(const FString InputString, const FString CompDelimiter, const FString VectorDelimiter, TArray<FVector>& VArray) {
+void ULightactBPLibrary::stringToVectorArray(const FString InputString, const FString ComponentDelimiter, const FString VectorDelimiter, TArray<FVector>& VArray) {
 
 	// add default values
 	TArray<float> OutConverts;
@@ -211,13 +211,13 @@ void ULightactBPLibrary::stringToVectorArray(const FString InputString, const FS
 	int len = InputString.ParseIntoArray(VecSplits, VectorDelimiter.GetCharArray().GetData(), true);
 	for (int i = 0; i < len; i++) {
 		TArray<FString> CompSplits;
-		int len = VecSplits[i].ParseIntoArray(CompSplits, CompDelimiter.GetCharArray().GetData(), true);
+		int len2 = VecSplits[i].ParseIntoArray(CompSplits, ComponentDelimiter.GetCharArray().GetData(), true);
 		int minVal;
-		if (len > 3)  minVal = 3;
-		else  minVal = len;
+		if (len2 > 3)  minVal = 3;
+		else  minVal = len2;
 		//min(len, 3)
-		for (int i = 0; i < minVal; i++) {
-			OutConverts[i] = FCString::Atof(CompSplits[i].GetCharArray().GetData());
+		for (int j = 0; j < minVal; j++) {
+			OutConverts[j] = FCString::Atof(CompSplits[j].GetCharArray().GetData());
 		}
 		VArray.Add(FVector(OutConverts[0], OutConverts[1], OutConverts[2]));
 	}
