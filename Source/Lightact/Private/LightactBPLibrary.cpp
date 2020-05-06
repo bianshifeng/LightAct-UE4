@@ -1,30 +1,31 @@
-// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
-#include "LightactBPLibrary.h"
-#include "Lightact.h"
+#include "LightActBPLibrary.h"
+#include "LightAct.h"
 
 #define RAPIDJSON_HAS_STDSTRING 1
 #include "../rapidjson/writer.h"
 #include "../rapidjson/rapidjson.h"
 #include "../rapidjson/document.h"
 #include "../rapidjson/stringbuffer.h"
-#include "Containers/StringConv.h"
 
 #include "Windows/MinWindows.h"
 #include "time.h"
+#include "Containers/StringConv.h"
+#include <string>
 
 #include "Framework/Application/SlateApplication.h"
-#include "DesktopPlatformModule.h"
+#include "DesktopPlatform/Public/DesktopPlatformModule.h"
 
 
-ULightactBPLibrary::ULightactBPLibrary(const FObjectInitializer& ObjectInitializer)
+ULightActBPLibrary::ULightActBPLibrary(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
 
 }
 
 /* Reads a JSON string from shared memory file and outputs a map of strings to strings. */
-void ULightactBPLibrary::BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& resultMap, bool& success) {
+void ULightActBPLibrary::BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& resultMap, bool& success) {
 
 	resultMap.Empty();
 
@@ -59,23 +60,26 @@ void ULightactBPLibrary::BuildMap(const FString HandleName, const int HandleSize
 				CloseHandle(hMapFile);
 				success = true;
 
-			} else {
+			}
+			else {
 				resultMap.Add("Error", "Has Parse Error");
 				CloseHandle(hMapFile);
 				success = false;
 			}
-		} else {
+		}
+		else {
 			resultMap.Add("Error", "Could not map view of file");
 			CloseHandle(hMapFile);
 			success = false;
 		}
-	} else {
+	}
+	else {
 		resultMap.Add("Error", "Could not open file mapping object");
 		success = false;
 	}
 }
 
-void ULightactBPLibrary::createMemHandle(const FString HandleName, const int HandleSize, FString& error, bool& success) {
+void ULightActBPLibrary::createMemHandle(const FString HandleName, const int HandleSize, FString& error, bool& success) {
 	HANDLE hMapFile;
 
 	hMapFile = CreateFileMapping(
@@ -95,11 +99,11 @@ void ULightactBPLibrary::createMemHandle(const FString HandleName, const int Han
 	}
 }
 
-void ULightactBPLibrary::writeSharedMemory(TMap<FString, FString> stringMap, const FString HandleName, const int HandleSize, FString& error, bool& success) {
+void ULightActBPLibrary::writeSharedMemory(TMap<FString, FString> stringMap, const FString HandleName, const int HandleSize, FString& error, bool& success) {
 	HANDLE hMapFile;
 	LPCTSTR pBuf;
-	
-hMapFile = OpenFileMapping(
+
+	hMapFile = OpenFileMapping(
 		FILE_MAP_ALL_ACCESS,		// read/write access
 		FALSE,						// do not inherit the name
 		(LPCWSTR)*HandleName);      // name of mapping object
@@ -107,7 +111,7 @@ hMapFile = OpenFileMapping(
 	if (hMapFile == NULL)
 	{
 		error = "Could not open file mapping object.";
-		success=false;
+		success = false;
 		return;
 	}
 	pBuf = (LPTSTR)MapViewOfFile(hMapFile,		// handle to map object
@@ -134,8 +138,8 @@ hMapFile = OpenFileMapping(
 		UEKey = std::string(TCHAR_TO_UTF8(*Elem.Key));
 		UEVal = std::string(TCHAR_TO_UTF8(*Elem.Value));
 		document.AddMember(
-			rapidjson::Value(UEKey,document.GetAllocator()).Move(),
-			rapidjson::Value(UEVal,document.GetAllocator()).Move(),
+			rapidjson::Value(UEKey, document.GetAllocator()).Move(),
+			rapidjson::Value(UEVal, document.GetAllocator()).Move(),
 			document.GetAllocator());
 	}
 
@@ -147,7 +151,7 @@ hMapFile = OpenFileMapping(
 	//std::wstring wstr = std::wstring(jsonString.begin(), jsonString.end());
 	//const wchar_t* widecstr = wstr.c_str();
 	std::string wstr = std::string(jsonString.begin(), jsonString.end());
-	memset((PVOID)pBuf,0, HandleSize);
+	memset((PVOID)pBuf, 0, HandleSize);
 	memcpy((PVOID)pBuf, wstr.c_str(), wstr.length());
 	//CopyMemory((PVOID)pBuf, wstr.c_str(), (wstr.length* sizeof(char))); //and we write it to memory
 	//_getch();
@@ -155,11 +159,11 @@ hMapFile = OpenFileMapping(
 	success = true;
 }
 
-void ULightactBPLibrary::closeMemHandle(const FString HandleName, FString& error, bool& success) {
+void ULightActBPLibrary::closeMemHandle(const FString HandleName, FString& error, bool& success) {
 
 	HANDLE hMapFile;
 	//LPCTSTR pBuf;
-	
+
 	hMapFile = OpenFileMapping(
 		FILE_MAP_READ, // read access
 		FALSE, // do not inherit the name
@@ -170,14 +174,14 @@ void ULightactBPLibrary::closeMemHandle(const FString HandleName, FString& error
 		success = true;
 	}
 	else {
-		error="Could not open file mapping object.";
+		error = "Could not open file mapping object.";
 		success = false;
 	}
-	
+
 }
 
 /* Splits string by delimiters and returns a composed 3-D space vector. */
-void ULightactBPLibrary::stringToVector(const FString InputString, const FString Delimiters, FVector& Vector) {
+void ULightActBPLibrary::stringToVector(const FString InputString, const FString Delimiters, FVector& Vector) {
 
 	// add default values
 	TArray<float> OutConverts;
@@ -194,12 +198,12 @@ void ULightactBPLibrary::stringToVector(const FString InputString, const FString
 	for (int i = 0; i < minVal; i++) {
 		OutConverts[i] = FCString::Atof(OutSplits[i].GetCharArray().GetData());
 	}
-		
+
 	Vector = FVector(OutConverts[0], OutConverts[1], OutConverts[2]);
 }
 
 /* Splits string by delimiters and returns an array of 3-D space vectors. */
-void ULightactBPLibrary::stringToVectorArray(const FString InputString, const FString ComponentDelimiter, const FString VectorDelimiter, TArray<FVector>& VArray) {
+void ULightActBPLibrary::stringToVectorArray(const FString InputString, const FString ComponentDelimiter, const FString VectorDelimiter, TArray<FVector>& VArray) {
 
 	// add default values
 	TArray<float> OutConverts;
@@ -224,7 +228,7 @@ void ULightactBPLibrary::stringToVectorArray(const FString InputString, const FS
 }
 
 /* Splits string by delimiters and returns an array of integers. */
-void ULightactBPLibrary::stringToIntArray(const FString InputString, const FString Delimiter, TArray<int>& IntArr) {
+void ULightActBPLibrary::stringToIntArray(const FString InputString, const FString Delimiter, TArray<int>& IntArr) {
 
 	if (Delimiter == "")
 		return;
@@ -236,19 +240,19 @@ void ULightactBPLibrary::stringToIntArray(const FString InputString, const FStri
 	int len = InputString.ParseIntoArray(StringArr, Delimiter.GetCharArray().GetData(), true);
 	for (int i = 0; i < len; i++) {
 		temp = FCString::Atoi(StringArr[i].GetCharArray().GetData());
-		IntArr.Add(temp);		
+		IntArr.Add(temp);
 	}
 }
 
 /* Splits string by delimiters and returns an array of floats. */
-void ULightactBPLibrary::stringToFloatArray(const FString InputString, const FString Delimiter, TArray<float>& FloatArr) {
+void ULightActBPLibrary::stringToFloatArray(const FString InputString, const FString Delimiter, TArray<float>& FloatArr) {
 
 	if (Delimiter == "")
 		return;
 
 	// add default values
 	float temp = 0.f;
-	
+
 
 	TArray<FString> StringArr;
 	int len = InputString.ParseIntoArray(StringArr, Delimiter.GetCharArray().GetData(), true);
@@ -259,44 +263,44 @@ void ULightactBPLibrary::stringToFloatArray(const FString InputString, const FSt
 }
 
 /*Extrudes contours*/
-void ULightactBPLibrary::extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles) {
-	
+void ULightActBPLibrary::extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles) {
+
 	float currCont = 0;
 	Vertices.Empty(); //here we store all vertices
 	Triangles.Empty();//here we store all triangles
 	int lastVert = 0;
-	FVector contCoG = FVector(0.0f,0.0f,0.0f); //contour Center of Gravity
+	FVector contCoG = FVector(0.0f, 0.0f, 0.0f); //contour Center of Gravity
 	TArray<FVector> upperVertices; //upper plane of extruded contour
 	TArray<FVector> Vertices1Cont; //vertices of one contour
 	TArray<int32> Triangles1Cont; //triangles of one contour
 
 	for (int32 ic = 0; ic != Contours.Num(); ++ic) {
-		
+
 		if (Contours[ic][0] == currCont) { //if we are still in the same contour (we start with contour 0)
 			Vertices1Cont.Add(FVector(Contours[ic].Y * ScaleX, Contours[ic].Z * ScaleY, 0.0f));
 			contCoG += Vertices1Cont.Last();
 			upperVertices.Add(Vertices1Cont.Last() + FVector(0.0f, 0.0f, height));
 		}
-		if(Contours[ic][0] != currCont || ic >= Contours.Num()-1){ //if we encounter the next contour or reach the end
+		if (Contours[ic][0] != currCont || ic >= Contours.Num() - 1) { //if we encounter the next contour or reach the end
 			Vertices1Cont.Add(contCoG / Vertices1Cont.Num());
 			upperVertices.Add(Vertices1Cont.Last() + FVector(0.0f, 0.0f, height));
 			Vertices1Cont.Append(upperVertices); //append upper vertices to lower
 			upperVertices.Empty(); //and empty upperVertices so its ready for next iteration
 
-			
+
 			int contPoints = Vertices1Cont.Num() / 2; //number of points in the contour
-			
+
 			// we initialize the Triangles1Cont array
 			// it holds all triangles of one contour
 			Triangles1Cont.Empty();
-			Triangles1Cont.SetNum((contPoints-1) * 12); //lots of triangles for one contour
+			Triangles1Cont.SetNum((contPoints - 1) * 12); //lots of triangles for one contour
 			int k = 0;
 			int j = 0;
 
 			for (int32 i = 0; i != (contPoints - 1) * 3 - 1; ++i) { // we put a condition here just in case
-				
+
 				// if true we do the last 2 vertices per plane and break
-				if ((i) == (contPoints - 1) * 3 - 2) { 
+				if ((i) == (contPoints - 1) * 3 - 2) {
 					Triangles1Cont[i] = 0 + lastVert;
 					Triangles1Cont[i + 1] = (contPoints - 1) + lastVert;
 					Triangles1Cont[i + (contPoints - 1) * 3] = 2 * contPoints - 2 + lastVert;
@@ -305,7 +309,7 @@ void ULightactBPLibrary::extrudeContours(TArray<FVector> Contours, float height,
 				}
 
 				//the last point of all triangles on top and bottom plane is CoG
-				if ((i + 1) % 3 == 0 && (i - 1) != 0) { 
+				if ((i + 1) % 3 == 0 && (i - 1) != 0) {
 					Triangles1Cont[i] = contPoints - 1 + lastVert;
 					Triangles1Cont[i + (contPoints - 1) * 3] = 2 * contPoints - 1 + lastVert;
 					++k;
@@ -313,8 +317,8 @@ void ULightactBPLibrary::extrudeContours(TArray<FVector> Contours, float height,
 				else {
 					Triangles1Cont[i] = i - 2 * k + lastVert;
 					Triangles1Cont[i + (contPoints - 1) * 3] = contPoints * 2 - 2 - i + 2 * k + lastVert;
-					
-					
+
+
 					if (i % 3 == 0) { //here we do the triangles on the sides
 						Triangles1Cont[(contPoints - 1 + j) * 6] = i - 2 * j + lastVert;
 						if (j < contPoints - 2) {
@@ -349,34 +353,36 @@ void ULightactBPLibrary::extrudeContours(TArray<FVector> Contours, float height,
 				break;
 			else
 				--ic;
-		}		
-	}	
+		}
+	}
 }
 
 /* Construct a simple string for Lightact heartbeat signal. It uses current system time. */
-void ULightactBPLibrary::lightactProcessTick(int& Value) {
+void ULightActBPLibrary::lightactProcessTick(int& Value) {
 
 	struct tm * timeinfo;
-	time_t currTime;	
+	time_t currTime;
 	time(&currTime);
 
 	timeinfo = localtime(&currTime);
 	Value = timeinfo->tm_sec + 60 * timeinfo->tm_min + 60 * 60 * timeinfo->tm_hour;
-	
+
 }
 
-void ULightactBPLibrary::openFileDialog(const FString& DialogTitle, const FString& DefaultPath, const FString& FileTypes, TArray<FString>& OutFileNames)
+void ULightActBPLibrary::openFileDialog(const FString& DialogTitle, const FString& DefaultPath, const FString& FileTypes, TArray<FString>& OutFileNames)
 {
-    IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
-    if (DesktopPlatform)
-    {
-        // Opening the file picker!
-        // A value of 0 represents single file selection while a value of 1 represents multiple file selection
-            
-        const void* ParentWindowHandle = FSlateApplication::Get().FindBestParentWindowHandleForDialogs(nullptr);
+	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
+	if (DesktopPlatform)
+	{
+		// Opening the file picker!
+		// A value of 0 represents single file selection while a value of 1 represents multiple file selection
 
-        uint32 SelectionFlag = 0;
+		const void* ParentWindowHandle = FSlateApplication::Get().FindBestParentWindowHandleForDialogs(nullptr);
 
-        DesktopPlatform->OpenFileDialog(ParentWindowHandle, DialogTitle, DefaultPath, FString(""), FileTypes, SelectionFlag, OutFileNames);
-    }
+		uint32 SelectionFlag = 0;
+
+		DesktopPlatform->OpenFileDialog(ParentWindowHandle, DialogTitle, DefaultPath, FString(""), FileTypes, SelectionFlag, OutFileNames);
+	}
 }
+
+

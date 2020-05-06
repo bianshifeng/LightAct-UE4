@@ -1,9 +1,9 @@
-// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "LightactBPLibrary.generated.h"
+#include "LightActBPLibrary.generated.h"
 
 /* 
 *	Function library class.
@@ -23,11 +23,11 @@
 *	https://wiki.unrealengine.com/Custom_Blueprint_Node_Creation
 */
 UCLASS()
-class ULightactBPLibrary : public UBlueprintFunctionLibrary
+class ULightActBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Shared memory JSON to string map", Keywords = "LightAct shared memory JSON to string map", ToolTip = "Reads a JSON string from shared memory file and outputs a map of strings to strings."), Category = "LightAct")
+		UFUNCTION(BlueprintCallable, meta = (DisplayName = "Shared memory JSON to string map", Keywords = "LightAct shared memory JSON to string map", ToolTip = "Reads a JSON string from shared memory file and outputs a map of strings to strings."), Category = "LightAct")
 		static void BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& ResultMap, bool& Success);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Open shared memory", Keywords = "Open shared memory handle JSON", ToolTip = "Opens shared memory handle. Usually connected to OnBeginPlay. Handle has to be closed on EndPlay."), Category = "LightAct")
@@ -47,17 +47,17 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Integer Array", Keywords = "LightAct string explode to integer array", ToolTip = "Splits string by delimiters and returns an array of integers."), Category = "LightAct")
 		static void stringToIntArray(const FString InputString, const FString Delimiter, TArray<int>& IntArr);
-	
+
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "String to Float Array", Keywords = "LightAct string explode to float array", ToolTip = "Splits string by delimiters and returns an array of floats."), Category = "LightAct")
 		static void stringToFloatArray(const FString InputString, const FString Delimiter, TArray<float>& FloatArr);
-	
+
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "Extrude Contours", Keywords = "LightAct extrude contours vector array", ToolTip = "Extrudes contours and creates array of vertices and triangles. Connect these to Create Mesh Section."), Category = "LightAct")
 		static void extrudeContours(TArray<FVector> Contours, float height, float ScaleX, float ScaleY, TArray<FVector>& Vertices, TArray<int32>& Triangles);
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "LightAct Tick", Keywords = "LightAct process heartbeat", ToolTip = "Creates a LightAct tick heartbeat value."), Category = "LightAct")
 		static void lightactProcessTick(int& Heartbeat);
 
-    UFUNCTION(BlueprintCallable, meta = (DisplayName = "openFileDialog", Keywords = "Open File Dialog", ToolTip = "Opens a file dialog and returns pointer to it"), Category = "FileDialog")
-        static void openFileDialog(const FString& DialogTitle, const FString& DefaultPath, const FString& FileTypes, TArray<FString>& OutFileNames);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "openFileDialog", Keywords = "Open File Dialog", ToolTip = "Opens a file dialog and returns pointer to it"), Category = "FileDialog")
+		static void openFileDialog(const FString& DialogTitle, const FString& DefaultPath, const FString& FileTypes, TArray<FString>& OutFileNames);
 
 };
