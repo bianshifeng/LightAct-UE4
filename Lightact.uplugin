@@ -2,13 +2,14 @@
   "FileVersion": 3,
   "Version": 7,
   "VersionName": "2.5",
+  "EngineVersion": "4.25.0",
   "FriendlyName": "LightAct",
   "Description": "A set of functionalities enabling integration with LightAct media server.",
   "Category": "LightAct",
   "CreatedBy": "LightAct",
   "CreatedByURL": "https://lightact.io",
   "DocsURL": "https://lightact.io/docs/",
-  "MarketplaceURL": "",
+  "MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/45620db69ab745c7a393aec03842be19",
   "SupportURL": "https://lightact.io/support/",
   "CanContainContent": true,
   "IsBetaVersion": false,
@@ -18,7 +19,8 @@
     {
       "Name": "LightAct",
       "Type": "Runtime",
-      "LoadingPhase": "PreLoadingScreen"
+      "LoadingPhase": "PreLoadingScreen",
+      "WhitelistPlatforms": [ "Win64" ]
     }
   ]
 }

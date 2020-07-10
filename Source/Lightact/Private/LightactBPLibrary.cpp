@@ -9,6 +9,7 @@
 #include "../rapidjson/document.h"
 #include "../rapidjson/stringbuffer.h"
 
+//#define WIN32_LEAN_AND_MEAN
 #include "Windows/MinWindows.h"
 #include "time.h"
 #include "Containers/StringConv.h"
@@ -360,12 +361,13 @@ void ULightActBPLibrary::extrudeContours(TArray<FVector> Contours, float height,
 /* Construct a simple string for Lightact heartbeat signal. It uses current system time. */
 void ULightActBPLibrary::lightactProcessTick(int& Value) {
 
-	struct tm * timeinfo;
+	struct tm timeinfo;
 	time_t currTime;
 	time(&currTime);
 
-	timeinfo = localtime(&currTime);
-	Value = timeinfo->tm_sec + 60 * timeinfo->tm_min + 60 * 60 * timeinfo->tm_hour;
+	//timeinfo = localtime(&currTime);
+	localtime_s(&timeinfo, &currTime);
+	Value = timeinfo.tm_sec + 60 * timeinfo.tm_min + 60 * 60 * timeinfo.tm_hour;
 
 }
 
