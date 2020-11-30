@@ -1,4 +1,3 @@
-*Modification of original plugin by [AleDel](https://github.com/AleDel/Spout-UE4) with UE versions 4.19+.*
 # LightAct-UE4
 A set of functionalities enabling integration of Unreal Engine with [LightAct media server](https://lightact-systems.com).
 
